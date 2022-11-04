@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header__content">
+          <h1 class="header__title">TODAY'S WEATHER</h1>
+          <form id="search-form">
+            <input
+              type="text"
+              class="button-input"
+              placeholder="Edit location"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+              autocomplete="off"
+              autofocus="on"
+              id="search-text-input"
+              required
+            />
+            <input
+              class="button-search"
+              type="submit"
+              value="Search"
+              id="button-addon2"
+            />
+            <button
+              class="button-current-location"
+              id="current-location"
+              type="button"
+            >
+              Current
+            </button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <div class="main__content">
+          <h2 class="main__city" id="city">Mykolaiv</h2>
+          <div class="main__current-city">
+            <div class="main__current-forecast">
+              <div class="main__current-left-box">
+                <img class="main__current-img" src="images/cloudy.png" alt="" />
+                <h3 class="main__current-title" id="current-description">
+                  Cloudy
+                </h3>
+                <div class="main__temp-box">
+                  <h3 class="main__current-temp" id="current-temp"></h3>
+                  <span>˚</span>
+                  <a class="celsius-link active" id="celsius">C</a>
+                  <a class="fahrenheit-link" id="fahrenheit">F</a>
+                </div>
+              </div>
+            </div>
+            <div class="main__current-right-box">
+              <p class="main__current-date" id="current-date">
+                Friday, 10-21-2022
+              </p>
+              <p class="main__current-humidity">Humidity: <span>78</span>%</p>
+              <p class="main__current-wind">Wind: <span>0</span>km/h</p>
+            </div>
+            <div class="main__day-forecast">
+              <ul class="main__day-box">
+                <li>
+                  <p class="main__day-time">4 AM</p>
+                  <img class="main__day-img" src="images/sun.png" />
+                  <p class="main__day-temp">12</p>
+                  <span>˚</span>
+                </li>
+                <li>
+                  <p class="main__day-time">7 AM</p>
+                  <img class="main__day-img" src="images/cloudy.png" />
+                  <p class="main__day-temp">15</p>
+                  <span>˚</span>
+                </li>
+                <li>
+                  <p class="main__day-time">10 AM</p>
+                  <img class="main__day-img" src="images/cloud.png" />
+                  <p class="main__day-temp">16</p>
+                  <span>˚</span>
+                </li>
+                <li>
+                  <p class="main__day-time">1 PM</p>
+                  <img class="main__day-img" src="images/cloud.png" />
+                  <p class="main__day-temp">14</p>
+                  <span>˚</span>
+                </li>
+                <li>
+                  <p class="main__day-time">4 PM</p>
+                  <img class="main__day-img" src="images/cloudy.png" />
+                  <p class="main__day-temp">12</p>
+                  <span>˚</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="main__week-forecast">
+            <ul class="main__week-items">
+              <li class="main__week-item">
+                <p class="main__week-day" id="day-1">Mon</p>
+                <img
+                  class="main__week-img"
+                  src="images/raining.png"
+                  alt="img"
+                />
+                <span class="main__week-temp">14</span>
+                <span>˚</span>
+              </li>
+              <li class="main__week-item">
+                <p class="main__week-day" id="day-2">Tue</p>
+                <img
+                  class="main__week-img"
+                  src="images/raining.png"
+                  alt="img"
+                />
+                <span class="main__week-temp">12</span><span>˚</span>
+              </li>
+              <li class="main__week-item">
+                <p class="main__week-day" id="day-3">Wed</p>
+                <img
+                  class="main__week-img"
+                  src="images/rainy-day.png"
+                  alt="img"
+                />
+                <span class="main__week-temp">13<span>˚</span></span>
+              </li>
+              <li class="main__week-item">
+                <p class="main__week-day" id="day-4">Thu</p>
+                <img class="main__week-img" src="images/sun.png" alt="img" />
+                <span class="main__week-temp">14<span>˚</span></span>
+              </li>
+              <li class="main__week-item">
+                <p class="main__week-day" id="day-5">Fri</p>
+                <img class="main__week-img" src="images/cloud.png" alt="img" />
+                <span class="main__week-temp">12<span>˚</span></span>
+              </li>
+              <li class="main__week-item">
+                <p class="main__week-day" id="day-6">Sat</p>
+                <img
+                  class="main__week-img"
+                  src="images/rainy-day.png"
+                  alt="img"
+                />
+                <span class="main__week-temp">14<span>˚</span></span>
+              </li>
+              <li class="main__week-item">
+                <p class="main__week-day" id="day-7">Sun</p>
+                <img
+                  class="main__week-img"
+                  src="images/rainy-day.png"
+                  alt="img"
+                />
+                <span class="main__week-temp">14<span>˚</span></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
