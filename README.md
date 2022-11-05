@@ -1,1 +1,1 @@
-[Wheather forecast](https://pages.github.com/)
+[Wheather forecast](https://okkssana.github.io/sheCodesPlusWeek-6/)
