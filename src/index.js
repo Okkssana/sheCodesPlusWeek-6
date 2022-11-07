@@ -4,6 +4,8 @@ let currentDate = document.getElementById('current-date');
 let hours = now.getHours();
 let minutes = now.getMinutes();
 let day = now.getDay();
+let currentFahrenheit = document.getElementById('fahrenheit');
+let currentCelsius = document.getElementById('celsius');
 
 let weekDay = [
   'Sunday',
@@ -25,7 +27,13 @@ function search(event) {
   let searchInput = document.getElementById('search-text-input');
   let currentCity = document.getElementById('city');
   currentCity.innerHTML = searchInput.value;
+  let city = searchInput.value;
   searchInput.value = '';
+  currentFahrenheit.classList.remove('active');
+  currentCelsius.classList.add('active');
+  let apiKey = 'f7ffe62985ec74cf527d11a19fb3eb21';
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
 
 function formatDay(timestamp) {
@@ -125,9 +133,6 @@ function showTemperature(response) {
   cityName.innerHTML = response.data.name;
   let temperatureDescription = document.getElementById('current-description');
   temperatureDescription.innerHTML = response.data.weather[0].description;
-
-  let currentFahrenheit = document.getElementById('fahrenheit');
-  let currentCelsius = document.getElementById('celsius');
 
   currentFahrenheit.addEventListener('click', function (e) {
     document.getElementById('current-temp').innerText = Math.round(

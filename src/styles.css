@@ -99,9 +99,6 @@ main {
   padding: 0 15px;
   text-align: center;
 }
-.main {
-  margin: 20px 0;
-}
 .button-input {
   width: 235px;
   height: 40px;
@@ -172,6 +169,9 @@ main {
 .header__title {
   color: cornflowerblue;
   font-size: 30px;
+  text-transform: uppercase;
+  max-width: 318px;
+  text-shadow: 5px 1px 2px #ffffff, 0 0 1em #0083ff, 0 0 0.2em #b7b7ff;
 }
 .main__content {
   margin-top: 35px;
@@ -190,7 +190,8 @@ main {
   background: rgb(100, 149, 237, 0.2);
   border-radius: 5px;
   margin-top: 35px;
-  width: 160px;
+  max-width: 190px;
+  font-size: 23px;
 }
 .main__current-left-box {
   max-width: 190px;
@@ -203,7 +204,6 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 30px;
   font-size: 30px;
 }
 .main__current-img {
@@ -214,6 +214,9 @@ main {
   text-transform: capitalize;
   line-height: 1.2;
   /* font-size: 28px; */
+}
+.main__current-temp-box {
+  display: inline-block;
 }
 .main__current-temp {
   width: 40px;
@@ -226,21 +229,24 @@ main {
   vertical-align: sub;
 }
 .main__current-humidity {
-  font-size: 20px;
   margin-top: 15px;
 }
 .main__current-wind {
-  font-size: 20px;
   margin-top: 15px;
 }
-.main__current-date {
-  font-size: 20px;
-}
+
 ul {
-  display: flex;
   list-style-type: none;
+}
+.main__day-box {
+  display: flex;
   justify-content: space-evenly;
 }
+.main__week-items {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .main__day-forecast {
   margin-top: 53px;
   font-weight: 700;
@@ -264,11 +270,12 @@ ul {
   width: 70px;
 }
 .main__day-time {
-  font-size: 20px;
+  font-size: 22px;
 }
 .main__day-temp {
   display: inline-block;
   font-size: 28px;
+  margin-left: 10px;
 }
 .main__day-box span {
   font-size: 28px;
@@ -295,4 +302,152 @@ ul {
 .main__week-temp {
   margin-top: 5px;
   font-weight: 700;
+}
+.footer {
+  margin-bottom: 15px;
+}
+.footer__repository {
+}
+.footer__link {
+  font-size: 20px;
+  font-weight: 700;
+  color: grey;
+  border: 1px solid #dfdfdf;
+  padding: 9px;
+  border-radius: 20px;
+  background-color: #ebe9e6;
+  display: inline-block;
+}
+.footer__link:hover {
+  box-shadow: cadetblue;
+  box-shadow: rgb(37 39 89 / 30%) 7px 4px 8px 0;
+  color: #fff;
+  transition: all ease-in 0.2s;
+  background-color: #cacaca;
+}
+
+@media (max-width: 880px) {
+  .header__content {
+    justify-content: space-evenly;
+  }
+  .main__current-city {
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .main__day-box {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .main__day-box li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .main__day-temp {
+    font-size: 25px;
+  }
+  .main__day-img {
+    width: 40px;
+    margin: 0px;
+  }
+  .main__day-forecast {
+    max-width: 180px;
+    margin-top: 0px;
+  }
+  .main__current-title {
+    font-size: 23px;
+  }
+  .main__day-time {
+    width: 60px;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  .main__current-temp {
+    margin-top: 0;
+    font-size: 30px;
+  }
+  .main__current-left-box {
+    margin-right: 10px;
+  }
+  .main__current-img {
+    width: 67px;
+  }
+  .fahrenheit-link,
+  .celsius-link {
+    font-size: 20px;
+  }
+  .main__temp-box {
+    margin-top: 10px;
+  }
+  .main__week-day {
+    font-size: 20px;
+  }
+  .main__week-item:first-child {
+    margin-left: 5px;
+  }
+  .main__week-item span {
+    font-size: 20px;
+  }
+  .main__week-img {
+    width: 45px;
+  }
+  .main__week-item {
+    margin-right: 5px;
+    max-width: 75px;
+  }
+  .main__content {
+    height: 500px;
+  }
+  .header__search-form {
+    max-width: 235px;
+  }
+  .button-input {
+    margin-bottom: 10px;
+  }
+  .main__current-temp-box {
+    display: block;
+  }
+}
+@media (max-width: 590px) {
+  .main__week-item {
+    max-width: 45px;
+  }
+  .main__week-img {
+    width: 32px;
+  }
+  .main__week-day {
+    font-size: 17px;
+  }
+  .main__week-item {
+    padding: 5px;
+  }
+  .main__day-time {
+    font-size: 16px;
+  }
+  .main__day-temp {
+    font-size: 20px;
+  }
+  .main__current-right-box {
+    font-size: 20px;
+  }
+  .main__current-img {
+    width: 55px;
+  }
+  .main__current-title {
+    font-size: 22px;
+  }
+  .main__current-humidity {
+    margin-top: 7px;
+  }
+  .main__content {
+    height: 550px;
+    margin-top: 20px;
+  }
+  .header__content {
+    flex-direction: column;
+    margin-top: 23px;
+  }
+  .header__title {
+    margin-bottom: 10px;
+  }
 }

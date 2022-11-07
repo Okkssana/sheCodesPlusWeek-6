@@ -12,8 +12,8 @@
     <header class="header">
       <div class="container">
         <div class="header__content">
-          <h1 class="header__title">TODAY'S WEATHER</h1>
-          <form id="search-form">
+          <h1 class="header__title">weather forecast</h1>
+          <form class="header__search-form" id="search-form">
             <input
               type="text"
               class="button-input"
@@ -55,8 +55,10 @@
                   Cloudy
                 </h3>
                 <div class="main__temp-box">
-                  <h3 class="main__current-temp" id="current-temp"></h3>
-                  <span>˚</span>
+                  <div class="main__current-temp-box">
+                    <h3 class="main__current-temp" id="current-temp"></h3>
+                    <span>˚</span>
+                  </div>
                   <a class="celsius-link active" id="celsius">C</a>
                   <a class="fahrenheit-link" id="fahrenheit">F</a>
                 </div>
@@ -167,6 +169,18 @@
         </div>
       </div>
     </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__repository">
+          <a
+            class="footer__link"
+            href="https://github.com/Okkssana/sheCodesPlusWeek-6"
+            target="_blank"
+            >GitHub repository
+          </a>
+        </div>
+      </div>
+    </footer>
 
     <script src="src/index.js"></script>
   </body>
