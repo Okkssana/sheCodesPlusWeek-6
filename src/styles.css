@@ -450,4 +450,8 @@ ul {
   .header__title {
     margin-bottom: 10px;
   }
+  .button-search,
+  .button-current-location {
+    width: 100px;
+  }
 }
