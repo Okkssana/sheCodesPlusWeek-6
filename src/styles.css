@@ -411,9 +411,6 @@ ul {
 }
 @media (max-width: 590px) {
   .main__week-item {
-    /* display: none; */
-  }
-  .main__week-item {
     max-width: 45px;
   }
   .main__week-img {
@@ -461,6 +458,7 @@ ul {
     max-width: 330px;
     height: 510px;
     margin: 0 auto;
+    margin-bottom: 20px;
     padding: 5px;
   }
   .header__content {
