@@ -19,14 +19,14 @@ let weekDay = [
 let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 let apiKey = 'f7ffe62985ec74cf527d11a19fb3eb21';
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Mykolaiv&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Kyiv&units=metric`;
 axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 
 function search(event) {
   event.preventDefault();
   let searchInput = document.getElementById('search-text-input');
-  let currentCity = document.getElementById('city');
-  currentCity.innerHTML = searchInput.value;
+  // let currentCity = document.getElementById('city');
+  // currentCity.innerHTML = searchInput.value;
   let city = searchInput.value;
   searchInput.value = '';
   currentFahrenheit.classList.remove('active');
