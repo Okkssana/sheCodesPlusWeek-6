@@ -62,46 +62,67 @@
                 </div>
               </div>
             </div>
-            <div class="main__current-right-box">
-              <p class="main__current-date" id="current-date">
-                Friday, 10-21-2022
-              </p>
-              <p class="main__current-humidity">Humidity: <span>78</span>%</p>
-              <p class="main__current-wind">Wind: <span>0</span>km/h</p>
-            </div>
-            <div class="main__day-forecast">
-              <ul class="main__day-box">
-                <li>
-                  <p class="main__day-time">4 AM</p>
-                  <img class="main__day-img" src="images/sun.png" />
-                  <p class="main__day-temp">12</p>
-                  <span>˚</span>
-                </li>
-                <li>
-                  <p class="main__day-time">7 AM</p>
-                  <img class="main__day-img" src="images/cloudy.png" />
-                  <p class="main__day-temp">15</p>
-                  <span>˚</span>
-                </li>
-                <li>
-                  <p class="main__day-time">10 AM</p>
-                  <img class="main__day-img" src="images/cloud.png" />
-                  <p class="main__day-temp">16</p>
-                  <span>˚</span>
-                </li>
-                <li>
-                  <p class="main__day-time">1 PM</p>
-                  <img class="main__day-img" src="images/cloud.png" />
-                  <p class="main__day-temp">14</p>
-                  <span>˚</span>
-                </li>
-                <li>
-                  <p class="main__day-time">4 PM</p>
-                  <img class="main__day-img" src="images/cloudy.png" />
-                  <p class="main__day-temp">12</p>
-                  <span>˚</span>
-                </li>
-              </ul>
+            <div class="main__box">
+              <div class="main__current-right-box">
+                <p class="main__current-date" id="current-date">
+                  Friday, 10-21-2022
+                </p>
+                <p class="main__current-humidity">
+                  Humidity: <span id="humidity">78</span>%
+                </p>
+                <p class="main__current-wind">
+                  Wind: <span id="wind">0</span>km/h
+                </p>
+              </div>
+              <div class="main__day-forecast">
+                <ul class="main__day-box">
+                  <li>
+                    <div class="main__time-box">
+                      <p class="main__day-time" id="time-now">4</p>
+                      <p id="time-format">00</p>
+                    </div>
+                    <img class="main__day-img" src="images/sun.png" />
+                    <p class="main__day-temp" id="day-temp-now">12</p>
+                    <span>˚</span>
+                  </li>
+                  <li>
+                    <div class="main__time-box">
+                      <p class="main__day-time" id="time1">4</p>
+                      <p id="time-format">00</p>
+                    </div>
+                    <img class="main__day-img" src="images/cloudy.png" />
+                    <p class="main__day-temp" id="day-temp-1">15</p>
+                    <span>˚</span>
+                  </li>
+                  <li>
+                    <div class="main__time-box">
+                      <p class="main__day-time" id="time2">4</p>
+                      <p id="time-format">00</p>
+                    </div>
+                    <img class="main__day-img" src="images/cloud.png" />
+                    <p class="main__day-temp" id="day-temp-2">16</p>
+                    <span>˚</span>
+                  </li>
+                  <li>
+                    <div class="main__time-box">
+                      <p class="main__day-time" id="time3">4</p>
+                      <p id="time-format">00</p>
+                    </div>
+                    <img class="main__day-img" src="images/cloud.png" />
+                    <p class="main__day-temp" id="day-temp-3">13</p>
+                    <span>˚</span>
+                  </li>
+                  <li>
+                    <div class="main__time-box">
+                      <p class="main__day-time" id="time4">4</p>
+                      <p id="time-format">00</p>
+                    </div>
+                    <img class="main__day-img" src="images/cloudy.png" />
+                    <p class="main__day-temp" id="day-temp-4">12</p>
+                    <span>˚</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="main__week-forecast">
@@ -113,7 +134,9 @@
                   src="images/raining.png"
                   alt="img"
                 />
-                <span class="main__week-temp">14</span>
+                <span class="main__week-max-temp" id="max-temp1">14</span>
+                <span class="main__week-max-deg">˚</span>
+                <span class="main__week-min-temp" id="min-temp1">9</span>
                 <span>˚</span>
               </li>
               <li class="main__week-item">
@@ -123,7 +146,10 @@
                   src="images/raining.png"
                   alt="img"
                 />
-                <span class="main__week-temp">12</span><span>˚</span>
+                <span class="main__week-max-temp" id="max-temp1">14</span>
+                <span class="main__week-max-deg">˚</span>
+                <span class="main__week-min-temp" id="min-temp1">9</span>
+                <span>˚</span>
               </li>
               <li class="main__week-item">
                 <p class="main__week-day" id="day-3">Wed</p>
@@ -132,17 +158,26 @@
                   src="images/rainy-day.png"
                   alt="img"
                 />
-                <span class="main__week-temp">13<span>˚</span></span>
+                <span class="main__week-max-temp" id="max-temp1">15</span>
+                <span class="main__week-max-deg">˚</span>
+                <span class="main__week-min-temp" id="min-temp1">19</span>
+                <span>˚</span>
               </li>
               <li class="main__week-item">
                 <p class="main__week-day" id="day-4">Thu</p>
                 <img class="main__week-img" src="images/sun.png" alt="img" />
-                <span class="main__week-temp">14<span>˚</span></span>
+                <span class="main__week-max-temp" id="max-temp1">17</span>
+                <span class="main__week-max-deg">˚</span>
+                <span class="main__week-min-temp" id="min-temp1">12</span>
+                <span>˚</span>
               </li>
               <li class="main__week-item">
                 <p class="main__week-day" id="day-5">Fri</p>
                 <img class="main__week-img" src="images/cloud.png" alt="img" />
-                <span class="main__week-temp">12<span>˚</span></span>
+                <span class="main__week-max-temp" id="max-temp1">14</span>
+                <span class="main__week-max-deg">˚</span>
+                <span class="main__week-min-temp" id="min-temp1">9</span>
+                <span>˚</span>
               </li>
               <li class="main__week-item">
                 <p class="main__week-day" id="day-6">Sat</p>
@@ -151,7 +186,10 @@
                   src="images/rainy-day.png"
                   alt="img"
                 />
-                <span class="main__week-temp">14<span>˚</span></span>
+                <span class="main__week-max-temp" id="max-temp1">14</span>
+                <span class="main__week-max-deg">˚</span>
+                <span class="main__week-min-temp" id="min-temp1">9</span>
+                <span>˚</span>
               </li>
               <li class="main__week-item">
                 <p class="main__week-day" id="day-7">Sun</p>
@@ -160,7 +198,10 @@
                   src="images/rainy-day.png"
                   alt="img"
                 />
-                <span class="main__week-temp">14<span>˚</span></span>
+                <span class="main__week-max-temp" id="max-temp1">14</span>
+                <span class="main__week-max-deg">˚</span>
+                <span class="main__week-min-temp" id="min-temp1">9</span>
+                <span>˚</span>
               </li>
             </ul>
           </div>

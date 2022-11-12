@@ -136,6 +136,9 @@ main {
 .button-current-location:hover {
   background-color: #a5f4fc;
 }
+.main__box {
+  text-align: center;
+}
 .main__temp-box {
   margin-top: 20px;
 }
@@ -185,12 +188,13 @@ main {
   margin-bottom: 20px;
 }
 .main__current-right-box {
+  display: flex;
   align-self: center;
   padding: 10px;
-  background: rgb(100, 149, 237, 0.2);
+  /* background: #0250dd33; */
   border-radius: 5px;
-  margin-top: 35px;
-  max-width: 190px;
+  margin-top: 10px;
+  /* max-width: 190px; */
   font-size: 23px;
 }
 .main__current-left-box {
@@ -198,7 +202,7 @@ main {
 }
 .main__current-city {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 238px;
 }
 .main__current-forecast {
@@ -229,11 +233,17 @@ main {
   padding-top: -8px;
   vertical-align: sub;
 }
-.main__current-humidity {
-  margin-top: 15px;
-}
+.main__current-humidity,
 .main__current-wind {
-  margin-top: 15px;
+  margin-left: 45px;
+  background-color: #0250dd33;
+  padding: 10px;
+  border-radius: 15px;
+}
+.main__current-date {
+  background-color: #0250dd33;
+  padding: 10px;
+  border-radius: 15px;
 }
 
 ul {
@@ -243,26 +253,33 @@ ul {
   display: flex;
   justify-content: space-evenly;
 }
+
+.main__time-box {
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+}
+#time-format {
+  font-size: 12px;
+}
 .main__week-items {
   display: flex;
   justify-content: space-evenly;
 }
 
 .main__day-forecast {
-  margin-top: 53px;
   font-weight: 700;
-  width: 440px;
+  max-width: 440px;
   text-align: center;
+  margin: 20px auto 0;
 }
 .main__city {
   background-color: rgb(255 255 255 / 20%);
   width: 220px;
-  font-size: 23px;
+  font-size: 28px;
   margin: 0 auto;
   padding: 5px;
   border-radius: 5px;
-  margin-top: 13px;
-  height: 32px;
   text-transform: capitalize;
 }
 .main__day-img {
@@ -288,7 +305,7 @@ ul {
   background-color: rgb(255 255 255 / 30%);
   padding: 10px;
   border-radius: 7px;
-  width: 100px;
+  max-width: 101px;
 }
 .main__week-item span {
   font-size: 24px;
@@ -300,9 +317,16 @@ ul {
   width: 60px;
   margin-top: 5px;
 }
-.main__week-temp {
+.main__week-max-temp {
   margin-top: 5px;
   font-weight: 700;
+}
+.main__week-max-deg {
+  font-weight: 700;
+}
+.main__week-min-temp {
+  font-weight: 400;
+  margin-left: 5px;
 }
 .footer {
   margin-bottom: 15px;
@@ -432,6 +456,12 @@ ul {
   .main__day-temp {
     font-size: 15px;
   }
+  .main__day-box {
+    flex-direction: row;
+  }
+  .main__day-box li {
+    flex-direction: column;
+  }
   .main__day-box span {
     font-size: 19px;
   }
@@ -440,7 +470,8 @@ ul {
   }
   .main__current-right-box {
     font-size: 20px;
-    max-width: 95px;
+    max-width: 170px;
+    text-align: left;
   }
   .main__current-left-box {
     max-width: 80px;

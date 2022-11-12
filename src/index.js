@@ -18,9 +18,15 @@ let weekDay = [
 ];
 let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-let apiKey = 'f7ffe62985ec74cf527d11a19fb3eb21';
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Kyiv&units=metric`;
-axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
+let oneCallUrl = 'https://api.openweathermap.org/data/2.5/onecall?';
+let currentUrl = 'https://api.openweathermap.org/data/2.5/weather?';
+let city = 'q=Kyiv&';
+let lat = 'lat=46.635417&';
+let lon = 'lon=32.616867&';
+let apiOptions = 'units=metric&';
+let apiKey = 'appid=001bc651977f4b024af4d84282b0f02a';
+let file = currentUrl + city + apiOptions + apiKey;
+axios.get(file).then(showTemperature);
 
 function search(event) {
   event.preventDefault();
@@ -31,7 +37,7 @@ function search(event) {
   searchInput.value = '';
   currentFahrenheit.classList.remove('active');
   currentCelsius.classList.add('active');
-  let apiKey = 'f7ffe62985ec74cf527d11a19fb3eb21';
+  let apiKey = '001bc651977f4b024af4d84282b0f02a';
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
@@ -126,13 +132,23 @@ if (day === 6) {
 
 function showTemperature(response) {
   console.log(response.data);
+  let cityName = document.getElementById('city');
+  cityName.innerHTML = response.data.name;
+  let currentImg = document.querySelector('.main__current-img');
+  currentImg.setAttribute(
+    'src',
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  currentImg.setAttribute('alt', 'response.data.weather[0].description');
   let temperature = Math.round(response.data.main.temp);
   let temperatureElement = document.getElementById('current-temp');
   temperatureElement.innerHTML = temperature;
-  let cityName = document.getElementById('city');
-  cityName.innerHTML = response.data.name;
   let temperatureDescription = document.getElementById('current-description');
   temperatureDescription.innerHTML = response.data.weather[0].description;
+  document.getElementById('humidity').innerHTML = response.data.main.humidity;
+  document.getElementById('wind').innerHTML = Math.round(
+    response.data.wind.speed
+  );
 
   currentFahrenheit.addEventListener('click', function (e) {
     document.getElementById('current-temp').innerText = Math.round(
@@ -146,6 +162,41 @@ function showTemperature(response) {
     currentCelsius.classList.add('active');
     currentFahrenheit.classList.remove('active');
   });
+
+  let lat = `lat=${response.data.coord.lat}&`;
+  let lon = `lon=${response.data.coord.lon}&`;
+  file = oneCallUrl + lat + lon + apiOptions + apiKey;
+  axios.get(file).then(showHourlyDailyForecast);
+}
+function showHourlyDailyForecast(params) {
+  let time = hours;
+  let timeNow = document.getElementById('time-now');
+  timeNow.innerHTML = time;
+  // document.getElementById('time-now').innerHTML = time;
+  let time1 = document.getElementById('time1');
+  time1.innerHTML = time + 2;
+  let time2 = document.getElementById('time2');
+  time2.innerHTML = time + 4;
+  let time3 = document.getElementById('time3');
+  time3.innerHTML = time + 6;
+  let time4 = document.getElementById('time4');
+  time4.innerHTML = time + 8;
+  // document.getElementById('time3').innerHTML = time + 6;
+  // let time4 = document.getElementById('time4');
+  // time4.innerHTML = time + 8;
+  if (time1.innerHTML > 24) {
+    time1.innerHTML = time1.innerHTML - 24;
+  }
+
+  if (time2.innerHTML > 24) {
+    time2.innerHTML = time2.innerHTML - 24;
+  }
+  if (time3.innerHTML > 24) {
+    time3.innerHTML = time3.innerHTML - 24;
+  }
+  if (time4.innerHTML > 24) {
+    time4.innerHTML = time4.innerHTML - 24;
+  }
 }
 function showPosition(position) {
   let apiKey = 'f7ffe62985ec74cf527d11a19fb3eb21';
