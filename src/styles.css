@@ -192,7 +192,7 @@ main {
   align-self: center;
   padding: 10px;
   /* background: #0250dd33; */
-  border-radius: 5px;
+  border-radius: 10px;
   margin-top: 10px;
   /* max-width: 190px; */
   font-size: 23px;
@@ -203,7 +203,7 @@ main {
 .main__current-city {
   display: flex;
   justify-content: space-evenly;
-  height: 238px;
+  max-height: 238px;
 }
 .main__current-forecast {
   display: flex;
@@ -236,12 +236,12 @@ main {
 .main__current-humidity,
 .main__current-wind {
   margin-left: 45px;
-  background-color: #0250dd33;
+  background-color: rgb(2 80 221 / 15%);
   padding: 10px;
   border-radius: 15px;
 }
 .main__current-date {
-  background-color: #0250dd33;
+  background-color: rgb(2 80 221 / 15%);
   padding: 10px;
   border-radius: 15px;
 }
@@ -258,6 +258,7 @@ ul {
   display: flex;
   justify-content: center;
   font-size: 22px;
+  margin-left: 12px;
 }
 #time-format {
   font-size: 12px;
@@ -271,13 +272,13 @@ ul {
   font-weight: 700;
   max-width: 440px;
   text-align: center;
-  margin: 20px auto 0;
+  margin: 10px auto 0;
 }
 .main__city {
   background-color: rgb(255 255 255 / 20%);
   width: 220px;
   font-size: 28px;
-  margin: 0 auto;
+  margin: 5px auto 0;
   padding: 5px;
   border-radius: 5px;
   text-transform: capitalize;
@@ -288,7 +289,7 @@ ul {
   width: 70px;
 }
 .main__day-time {
-  font-size: 22px;
+  font-size: 24px;
 }
 .main__day-temp {
   display: inline-block;
@@ -300,6 +301,10 @@ ul {
 }
 .main__week-forecast {
   margin-top: 60px;
+}
+.main__week-max-box,
+.main__week-min-box {
+  display: inline-block;
 }
 .main__week-item {
   background-color: rgb(255 255 255 / 30%);
@@ -324,9 +329,14 @@ ul {
 .main__week-max-deg {
   font-weight: 700;
 }
+.main__week-min-deg {
+  color: rgb(255 255 255 / 70%);
+}
+
 .main__week-min-temp {
   font-weight: 400;
   margin-left: 5px;
+  color: rgb(255 255 255 / 70%);
 }
 .footer {
   margin-bottom: 15px;
@@ -359,36 +369,47 @@ ul {
     justify-content: space-evenly;
     align-items: center;
   }
-  .main__day-box {
+  .main__current-right-box {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  /* .main__day-box {
     flex-direction: column;
     margin-top: 10px;
-  }
-  .main__day-box li {
+  } */
+  /* .main__day-box li {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
   .main__day-temp {
-    font-size: 25px;
+    /* font-size: 25px; */
+    margin-top: 5px;
   }
   .main__day-img {
     width: 40px;
-    margin: 0px;
+    display: block;
+    margin: 5px;
+    /* margin: 0px; */
   }
   .main__day-forecast {
-    max-width: 180px;
-    margin-top: 0px;
+    /* max-width: 180px; */
+    margin-top: 18px;
   }
   .main__current-title {
     font-size: 23px;
   }
   .main__day-time {
-    width: 60px;
-    margin-right: 10px;
-    font-size: 20px;
+    /* width: 60px; */
+    /* margin-right: 10px; */
+    /* font-size: 20px; */
+  }
+  .main__day-forecast {
+    max-width: 550px;
   }
   .main__current-temp {
     margin-top: 0;
+    margin-bottom: 10px;
     font-size: 30px;
   }
   .main__current-left-box {
@@ -411,7 +432,7 @@ ul {
     margin-left: 5px;
   }
   .main__week-item span {
-    font-size: 20px;
+    font-size: 18px;
   }
   .main__week-img {
     width: 45px;
@@ -419,6 +440,7 @@ ul {
   .main__week-item {
     margin-right: 5px;
     max-width: 75px;
+    padding: 5px;
   }
   .main__content {
     height: 500px;
@@ -432,10 +454,64 @@ ul {
   .main__current-temp-box {
     display: block;
   }
+  .main__current-humidity,
+  .main__current-wind {
+    margin-left: 10px;
+  }
 }
-@media (max-width: 590px) {
+@media (max-width: 671px) {
+  .main__day-forecast {
+    margin-top: 10px;
+  }
+  .main__current-right-box {
+    margin-top: 0px;
+  }
+  .main__current-temp-box {
+    line-height: 0.6;
+  }
+  .main__day-time {
+    font-size: 20px;
+  }
+}
+@media (max-width: 610px) {
+  .main__week-max-box,
+  .main__week-min-box {
+    display: block;
+  }
+  .main__week-min-temp {
+    margin-left: 0;
+  }
+  .main__current-humidity,
+  .main__current-wind {
+    margin-left: 10px;
+  }
+  .main__current-right-box {
+    font-size: 18px;
+  }
+  .main__day-temp {
+    font-size: 20px;
+  }
+  .fahrenheit-link,
+  .celsius-link {
+    width: 28px;
+  }
+}
+@media (max-width: 500px) {
+  .main__current-humidity,
+  .main__current-wind {
+    background-color: transparent;
+    margin-left: 0;
+    padding: 5px;
+  }
+  .main__current-date {
+    background-color: transparent;
+    padding: 5px;
+  }
   .main__week-item {
     max-width: 45px;
+  }
+  .main__week-item span {
+    font-size: 15px;
   }
   .main__week-img {
     width: 25px;
@@ -446,22 +522,29 @@ ul {
   .main__week-item {
     padding: 5px;
   }
+  .main__temp-box {
+    margin-top: 5px;
+  }
   .main__day-time {
     font-size: 13px;
-    width: 38px;
   }
-  .main__day-forecast {
+
+  #time-format {
+    font-size: 7px;
+    margin-left: 2px;
+  }
+  /* .main__day-forecast {
     max-width: 115px;
-  }
+  } */
   .main__day-temp {
     font-size: 15px;
   }
-  .main__day-box {
+  /* .main__day-box {
     flex-direction: row;
-  }
-  .main__day-box li {
+  } */
+  /* .main__day-box li {
     flex-direction: column;
-  }
+  } */
   .main__day-box span {
     font-size: 19px;
   }
@@ -469,12 +552,25 @@ ul {
     width: 35px;
   }
   .main__current-right-box {
-    font-size: 20px;
-    max-width: 170px;
-    text-align: left;
+    flex-direction: column;
+    font-size: 15px;
+    background-color: rgb(2 80 221 / 15%);
+    padding: 0;
+    max-width: 220px;
+    margin-top: 20px;
+    /* text-align: left;  */
   }
-  .main__current-left-box {
+  /* .main__current-left-box {
     max-width: 80px;
+  } */
+  .main__day-forecast {
+    margin-top: 15px;
+  }
+  .main__current-temp-box span {
+    vertical-align: sub;
+  }
+  .main__current-temp {
+    margin-bottom: 5px;
   }
   .main__current-img {
     width: 55px;
@@ -482,12 +578,12 @@ ul {
   .main__current-title {
     font-size: 20px;
   }
-  .main__current-humidity {
+  /* .main__current-humidity {
     margin-top: 7px;
-  }
+  } */
   .main__content {
     max-width: 330px;
-    height: 510px;
+    height: 440px;
     margin: 0 auto;
     margin-bottom: 20px;
     padding: 5px;
@@ -506,6 +602,6 @@ ul {
   }
   .fahrenheit-link,
   .celsius-link {
-    width: 28px;
+    width: 26px;
   }
 }

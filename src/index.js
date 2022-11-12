@@ -169,7 +169,9 @@ function showTemperature(response) {
   axios.get(file).then(showHourlyDailyForecast);
 }
 function showHourlyDailyForecast(params) {
-  let time = hours;
+  let time = Number(hours);
+  console.log(time);
+
   let timeNow = document.getElementById('time-now');
   timeNow.innerHTML = time;
   // document.getElementById('time-now').innerHTML = time;
