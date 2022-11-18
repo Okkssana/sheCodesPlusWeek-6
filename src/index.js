@@ -16,7 +16,7 @@ let celsius = document.getElementById('celsius');
 celsius.addEventListener('click', intoCelsius);
 
 let currentLocation = document.getElementById('current-location');
-currentLocation.addEventListener('click', getCurrentPosition);
+currentLocation.addEventListener('click', getPosition);
 
 let form = document.querySelector('#search-form');
 form.addEventListener('submit', search);
@@ -28,7 +28,8 @@ function showCity() {
   axios.get(file).then(showTemperature);
 }
 
-function intoFahrenheit() {
+function intoFahrenheit(e) {
+  e.preventDefault();
   fahrenheit.classList.add('active');
   celsius.classList.remove('active');
   document.getElementById('wind').innerHTML = Math.round(windSpeed * 2.237);
@@ -36,7 +37,8 @@ function intoFahrenheit() {
   getImperialForecast();
 }
 
-function intoCelsius() {
+function intoCelsius(e) {
+  e.preventDefault();
   celsius.classList.add('active');
   fahrenheit.classList.remove('active');
   document.getElementById('current-temp').innerText = currentCelsius;
@@ -45,8 +47,8 @@ function intoCelsius() {
   getMetricForecast();
 }
 
-function search(event) {
-  event.preventDefault();
+function search(e) {
+  e.preventDefault();
   let searchInput = document.getElementById('search-text-input');
   let city = searchInput.value;
   searchInput.value = '';
@@ -255,7 +257,8 @@ function showPosition(position) {
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
 
-function getCurrentPosition() {
+function getPosition(e) {
+  e.preventDefault();
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
