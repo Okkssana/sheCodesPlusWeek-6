@@ -17,7 +17,7 @@ let celsius = document.getElementById('celsius');
 celsius.addEventListener('click', intoCelsius);
 
 let currentLocation = document.getElementById('current-location');
-currentLocation.addEventListener('click', getPosition);
+currentLocation.addEventListener('click', getCurrentPosition);
 
 let form = document.querySelector('#search-form');
 form.addEventListener('submit', search);
@@ -29,8 +29,8 @@ function showCity() {
   axios.get(file).then(showTemperature);
 }
 
-function intoFahrenheit(e) {
-  e.preventDefault();
+function intoFahrenheit() {
+  // e.preventDefault();
   fahrenheit.classList.add('active');
   celsius.classList.remove('active');
   document.getElementById('wind').innerHTML = Math.round(windSpeed * 2.237);
@@ -38,8 +38,8 @@ function intoFahrenheit(e) {
   getImperialForecast();
 }
 
-function intoCelsius(e) {
-  e.preventDefault();
+function intoCelsius() {
+  // e.preventDefault();
   celsius.classList.add('active');
   fahrenheit.classList.remove('active');
   document.getElementById('current-temp').innerText = currentCelsius;
@@ -55,12 +55,12 @@ function search(e) {
   searchInput.value = '';
   fahrenheit.classList.remove('active');
   celsius.classList.add('active');
-  let apiKey = '&appid=6a48a550fc04f170639e60d52b8a6bc5';
+  let apiKey = '6a48a550fc04f170639e60d52b8a6bc5';
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
 
-https: function weekFormat(timestamp) {
+function weekFormat(timestamp) {
   let date = new Date(timestamp * 1000);
   let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   let day = days[date.getDay()];
@@ -255,14 +255,14 @@ function showDailyImperialForecast(response) {
 }
 
 function showPosition(position) {
-  let apiKey = '&appid=6a48a550fc04f170639e60d52b8a6bc5';
+  let apiKey = '6a48a550fc04f170639e60d52b8a6bc5';
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
 
-function getPosition(e) {
+function getCurrentPosition(e) {
   e.preventDefault();
   navigator.geolocation.getCurrentPosition(showPosition);
 }
