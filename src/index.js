@@ -1,215 +1,262 @@
-let now = new Date();
-
-let currentDate = document.getElementById('current-date');
-let hours = now.getHours();
-let minutes = now.getMinutes();
-let day = now.getDay();
-let currentFahrenheit = document.getElementById('fahrenheit');
-let currentCelsius = document.getElementById('celsius');
-
-let weekDay = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
+let currentFahrenheit = null;
+let currentCelsius = null;
+let windSpeed = null;
+let lat = null;
+let lon = null;
 let oneCallUrl = 'https://api.openweathermap.org/data/2.5/onecall?';
 let currentUrl = 'https://api.openweathermap.org/data/2.5/weather?';
-let city = 'q=Kyiv&';
-let lat = 'lat=46.635417&';
-let lon = 'lon=32.616867&';
 let apiOptions = 'units=metric&';
-let apiKey = 'appid=001bc651977f4b024af4d84282b0f02a';
-let file = currentUrl + city + apiOptions + apiKey;
-axios.get(file).then(showTemperature);
+let apiKey = 'appid=91e4be9d3f0ce62462b88df7804804ae';
+let cityName = '';
 
-function search(event) {
-  event.preventDefault();
-  let searchInput = document.getElementById('search-text-input');
-  // let currentCity = document.getElementById('city');
-  // currentCity.innerHTML = searchInput.value;
-  let city = searchInput.value;
-  searchInput.value = '';
-  currentFahrenheit.classList.remove('active');
-  currentCelsius.classList.add('active');
-  let apiKey = '001bc651977f4b024af4d84282b0f02a';
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
-}
+let fahrenheit = document.getElementById('fahrenheit');
+fahrenheit.addEventListener('click', intoFahrenheit);
 
-function formatDay(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  let day = days[date.getDay()];
+let celsius = document.getElementById('celsius');
+celsius.addEventListener('click', intoCelsius);
 
-  return day;
-}
+let currentLocation = document.getElementById('current-location');
+currentLocation.addEventListener('click', getCurrentPosition);
 
 let form = document.querySelector('#search-form');
 form.addEventListener('submit', search);
 
-if (hours < 10) {
-  hours = `0${hours}`;
+function showCity() {
+  lat = 'lat=48.162381&';
+  lon = 'lon=30.439030&';
+  let file = currentUrl + lat + lon + apiOptions + apiKey;
+  axios.get(file).then(showTemperature);
 }
-if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
-currentDate.innerHTML = `${weekDay[day]}, ${hours}:${minutes}`;
 
-// let temperature = 14;
-// let temperature = 14;
+function intoFahrenheit() {
+  fahrenheit.classList.add('active');
+  celsius.classList.remove('active');
+  document.getElementById('wind').innerHTML = Math.round(windSpeed * 2.237);
+  document.getElementById('wind-indicator').innerHTML = 'mph';
+  getImperialForecast();
+}
 
-let firstDay = document.getElementById('day-1');
-let secondDay = document.getElementById('day-2');
-let thirdDay = document.getElementById('day-3');
-let fourthDay = document.getElementById('day-4');
-let fifthDay = document.getElementById('day-5');
-let sixthDay = document.getElementById('day-6');
-let seventhDay = document.getElementById('day-7');
+function intoCelsius() {
+  celsius.classList.add('active');
+  fahrenheit.classList.remove('active');
+  document.getElementById('current-temp').innerText = currentCelsius;
+  document.getElementById('wind').innerHTML = Math.round(windSpeed);
+  document.getElementById('wind-indicator').innerHTML = 'km/h';
+  getMetricForecast();
+}
 
-firstDay.innerHTML = days[day];
-if (day === 0) {
-  secondDay.innerHTML = days[day + 1];
-  thirdDay.innerHTML = days[day + 2];
-  fourthDay.innerHTML = days[day + 3];
-  fifthDay.innerHTML = days[day + 4];
-  sixthDay.innerHTML = days[day + 5];
-  seventhDay.innerHTML = days[day + 6];
+function search(event) {
+  event.preventDefault();
+  let searchInput = document.getElementById('search-text-input');
+  let city = searchInput.value;
+  searchInput.value = '';
+  fahrenheit.classList.remove('active');
+  celsius.classList.add('active');
+  let apiKey = '91e4be9d3f0ce62462b88df7804804ae';
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
-if (day === 1) {
-  secondDay.innerHTML = days[day + 1];
-  thirdDay.innerHTML = days[day + 2];
-  fourthDay.innerHTML = days[day + 3];
-  fifthDay.innerHTML = days[day + 4];
-  sixthDay.innerHTML = days[day + 5];
-  seventhDay.innerHTML = days[day - 1];
+
+function weekFormat(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  let day = days[date.getDay()];
+  return day;
 }
-if (day === 2) {
-  secondDay.innerHTML = days[day + 1];
-  thirdDay.innerHTML = days[day + 2];
-  fourthDay.innerHTML = days[day + 3];
-  fifthDay.innerHTML = days[day + +4];
-  sixthDay.innerHTML = days[day - 2];
-  seventhDay.innerHTML = days[day - 1];
-}
-if (day === 3) {
-  secondDay.innerHTML = days[day + 1];
-  thirdDay.innerHTML = days[day + 2];
-  fourthDay.innerHTML = days[day + 3];
-  fifthDay.innerHTML = days[day - 3];
-  sixthDay.innerHTML = days[day - 2];
-  seventhDay.innerHTML = days[day - 1];
-}
-if (day === 4) {
-  secondDay.innerHTML = days[day + 1];
-  thirdDay.innerHTML = days[day + 2];
-  fourthDay.innerHTML = days[day - 4];
-  fifthDay.innerHTML = days[day - 3];
-  sixthDay.innerHTML = days[day - 2];
-  seventhDay.innerHTML = days[day - 1];
-}
-if (day === 5) {
-  secondDay.innerHTML = days[day + 1];
-  thirdDay.innerHTML = days[day - 5];
-  fourthDay.innerHTML = days[day - 4];
-  fifthDay.innerHTML = days[day - 3];
-  sixthDay.innerHTML = days[day - 2];
-  seventhDay.innerHTML = days[day - 1];
-}
-if (day === 6) {
-  secondDay.innerHTML = days[day - 6];
-  thirdDay.innerHTML = days[day - 5];
-  fourthDay.innerHTML = days[day - 4];
-  fifthDay.innerHTML = days[day - 3];
-  sixthDay.innerHTML = days[day - 2];
-  seventhDay.innerHTML = days[day - 1];
+
+function currentDayFormat(timestamp) {
+  let weekDay = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  let now = new Date();
+  let day = now.getDay();
+  let hours = now.getHours();
+  let date = new Date(timestamp * 1000);
+  let currentDate = document.getElementById('current-date');
+  let minutes = date.getMinutes();
+  hours = hours < 10 ? `0${hours}` : hours;
+  minutes = minutes < 10 ? `0${minutes}` : minutes;
+  currentDate.innerHTML = `${weekDay[day]}, ${hours}:${minutes}`;
 }
 
 function showTemperature(response) {
-  console.log(response.data);
-  let cityName = document.getElementById('city');
-  cityName.innerHTML = response.data.name;
+  document.getElementById('city').innerHTML = response.data.name;
   let currentImg = document.querySelector('.main__current-img');
-  currentImg.setAttribute(
-    'src',
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  currentImg.setAttribute('alt', 'response.data.weather[0].description');
-  let temperature = Math.round(response.data.main.temp);
-  let temperatureElement = document.getElementById('current-temp');
-  temperatureElement.innerHTML = temperature;
-  let temperatureDescription = document.getElementById('current-description');
-  temperatureDescription.innerHTML = response.data.weather[0].description;
+  currentImg.setAttribute('src', `images/${response.data.weather[0].icon}.png`);
+  currentImg.setAttribute('alt', response.data.weather[0].description);
+  document.getElementById('current-description').innerHTML =
+    response.data.weather[0].description;
   document.getElementById('humidity').innerHTML = response.data.main.humidity;
-  document.getElementById('wind').innerHTML = Math.round(
-    response.data.wind.speed
+  windSpeed = response.data.wind.speed;
+  document.getElementById('wind').innerHTML = Math.round(windSpeed);
+  lat = `lat=${response.data.coord.lat}&`;
+  lon = `lon=${response.data.coord.lon}&`;
+  getMetricForecast();
+}
+
+function getMetricForecast() {
+  let file = oneCallUrl + lat + lon + apiOptions + apiKey;
+  axios.get(file).then(showCurrentMetricForecast);
+  axios.get(file).then(showHourlyMetricForecast);
+  axios.get(file).then(showDailyMetricForecast);
+}
+
+function showCurrentMetricForecast(response) {
+  currentCelsius = Math.round(response.data.current.temp);
+  document.getElementById('current-temp').innerHTML = currentCelsius;
+  currentDayFormat(response.data.current.dt);
+}
+
+function showHourlyMetricForecast(response) {
+  let hourlyForecast = response.data.hourly;
+  let hourlyForecastElement = document.getElementById('hourly-forecast');
+  let hourlyForecastHTML = '';
+  hourlyForecast.forEach(function (forecastHour, index) {
+    let now = new Date(forecastHour.dt * 1000);
+    let hours = now.getHours();
+    let temp = Math.round(forecastHour.temp);
+    if (index < 10 && index % 2) {
+      hourlyForecastHTML =
+        hourlyForecastHTML +
+        `<li>
+          <div class="main__time-box">
+            <p class="main__day-time" id="time-now">${hours}</p>
+            <p id="time-format">00</p>
+          </div>
+          <img class="main__day-img" src="images/${forecastHour.weather[0].icon}.png" />
+          <p class="main__day-temp" id="day-temp-now">${temp}</p>
+          <span>˚</span>
+        </li>`;
+    }
+    hourlyForecastElement.innerHTML = hourlyForecastHTML;
+  });
+}
+
+function showDailyMetricForecast(response) {
+  let dailyForecast = response.data.daily;
+  let dailyForecastElement = document.getElementById('week-forecast');
+  let dailyForecastHTML = '';
+  dailyForecast.forEach(function (forecastDay, index) {
+    if (index != 0 && index < 7) {
+      dailyForecastHTML =
+        dailyForecastHTML +
+        `<li class="main__week-item">
+                <p class="main__week-day" id="day-1">${weekFormat(
+                  forecastDay.dt
+                )}</p>
+                <img
+                  class="main__week-img"
+                  src="images/${forecastDay.weather[0].icon}.png"
+                  alt="img"
+                />
+                <div class="main__week-max-box">
+                  <span class="main__week-max-temp" id="max-temp1">${Math.round(
+                    forecastDay.temp.max
+                  )}</span>
+                  <span class="main__week-max-deg">˚</span>
+                </div>
+                <div class="main__week-min-box">
+                  <span class="main__week-min-temp" id="min-temp1">${Math.round(
+                    forecastDay.temp.min
+                  )}</span>
+                  <span class="main__week-min-deg">˚</span>
+                </div>
+              </li>`;
+    }
+    dailyForecastElement.innerHTML = dailyForecastHTML;
+  });
+}
+
+function getImperialForecast() {
+  let apiOptions = 'units=imperial&';
+  let file = oneCallUrl + lat + lon + apiOptions + apiKey;
+  axios.get(file).then(showCurrentImperialForecast);
+  axios.get(file).then(showHourlyImperialForecast);
+  axios.get(file).then(showDailyImperialForecast);
+}
+
+function showCurrentImperialForecast(response) {
+  document.getElementById('current-temp').innerText = Math.round(
+    response.data.current.temp
   );
-
-  currentFahrenheit.addEventListener('click', function (e) {
-    document.getElementById('current-temp').innerText = Math.round(
-      temperature * 1.8 + 32
-    );
-    currentFahrenheit.classList.add('active');
-    currentCelsius.classList.remove('active');
-  });
-  currentCelsius.addEventListener('click', function (e) {
-    document.getElementById('current-temp').innerText = temperature;
-    currentCelsius.classList.add('active');
-    currentFahrenheit.classList.remove('active');
-  });
-
-  let lat = `lat=${response.data.coord.lat}&`;
-  let lon = `lon=${response.data.coord.lon}&`;
-  file = oneCallUrl + lat + lon + apiOptions + apiKey;
-  axios.get(file).then(showHourlyDailyForecast);
 }
-function showHourlyDailyForecast(params) {
-  let time = Number(hours);
-  console.log(time);
 
-  let timeNow = document.getElementById('time-now');
-  timeNow.innerHTML = time;
-  // document.getElementById('time-now').innerHTML = time;
-  let time1 = document.getElementById('time1');
-  time1.innerHTML = time + 2;
-  let time2 = document.getElementById('time2');
-  time2.innerHTML = time + 4;
-  let time3 = document.getElementById('time3');
-  time3.innerHTML = time + 6;
-  let time4 = document.getElementById('time4');
-  time4.innerHTML = time + 8;
-  // document.getElementById('time3').innerHTML = time + 6;
-  // let time4 = document.getElementById('time4');
-  // time4.innerHTML = time + 8;
-  if (time1.innerHTML > 24) {
-    time1.innerHTML = time1.innerHTML - 24;
-  }
-
-  if (time2.innerHTML > 24) {
-    time2.innerHTML = time2.innerHTML - 24;
-  }
-  if (time3.innerHTML > 24) {
-    time3.innerHTML = time3.innerHTML - 24;
-  }
-  if (time4.innerHTML > 24) {
-    time4.innerHTML = time4.innerHTML - 24;
-  }
+function showHourlyImperialForecast(response) {
+  let hourlyForecast = response.data.hourly;
+  let hourlyForecastElement = document.getElementById('hourly-forecast');
+  let hourlyForecastHTML = '';
+  hourlyForecast.forEach(function (forecastHour, index) {
+    let now = new Date(forecastHour.dt * 1000);
+    let hours = now.getHours();
+    let temp = Math.round(forecastHour.temp);
+    if (index < 10 && index % 2) {
+      hourlyForecastHTML =
+        hourlyForecastHTML +
+        `<li>
+          <div class="main__time-box">
+            <p class="main__day-time" id="time-now">${hours}</p>
+            <p id="time-format">00</p>
+          </div>
+          <img class="main__day-img" src="images/${forecastHour.weather[0].icon}.png" />
+          <p class="main__day-temp" id="day-temp-now">${temp}</p>
+          <span>˚</span>
+        </li>`;
+    }
+    hourlyForecastElement.innerHTML = hourlyForecastHTML;
+  });
 }
+
+function showDailyImperialForecast(response) {
+  let dailyForecast = response.data.daily;
+  let dailyForecastElement = document.getElementById('week-forecast');
+  let dailyForecastHTML = '';
+  dailyForecast.forEach(function (forecastDay, index) {
+    if (index != 0 && index < 7) {
+      dailyForecastHTML =
+        dailyForecastHTML +
+        `<li class="main__week-item">
+                <p class="main__week-day" id="day-1">${weekFormat(
+                  forecastDay.dt
+                )}</p>
+                <img
+                  class="main__week-img"
+                  src="images/${forecastDay.weather[0].icon}.png"
+                  alt="img"
+                />
+                <div class="main__week-max-box">
+                  <span class="main__week-max-temp" id="max-temp1">${Math.round(
+                    forecastDay.temp.max
+                  )}</span>
+                  <span class="main__week-max-deg">˚</span>
+                </div>
+                <div class="main__week-min-box">
+                  <span class="main__week-min-temp" id="min-temp1">${Math.round(
+                    forecastDay.temp.min
+                  )}</span>
+                  <span class="main__week-min-deg">˚</span>
+                </div>
+              </li>`;
+    }
+    dailyForecastElement.innerHTML = dailyForecastHTML;
+  });
+}
+
 function showPosition(position) {
-  let apiKey = 'f7ffe62985ec74cf527d11a19fb3eb21';
+  let apiKey = '91e4be9d3f0ce62462b88df7804804ae';
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
+
 function getCurrentPosition() {
-  // e.preventDefault;
   navigator.geolocation.getCurrentPosition(showPosition);
 }
-let currentLocation = document.getElementById('current-location');
-currentLocation.addEventListener('click', getCurrentPosition);
+
+showCity();
