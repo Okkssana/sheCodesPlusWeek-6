@@ -111,10 +111,12 @@ main {
   height: 40px;
   width: 90px;
   font-size: 20px;
+  font-weight: 400;
   border: 4px solid #9ccbff;
   border-radius: 7px;
   background-color: #aeb0f2;
   color: #fff;
+  text-align: center;
 }
 .button-current-location {
   height: 40px;
@@ -124,6 +126,8 @@ main {
   border-radius: 7px;
   background-color: #aeb0f2;
   color: #fff;
+  text-align: center;
+  font-weight: 400;
 }
 .button-search:hover,
 .button-current-location:hover {
