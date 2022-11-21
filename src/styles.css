@@ -242,7 +242,7 @@ main {
 }
 
 .main__current-wind {
-  width: 147px;
+  width: 163px;
 }
 .main__current-date {
   background-color: rgb(2 80 221 / 15%);
@@ -444,12 +444,10 @@ ul {
   .button-input {
     margin-bottom: 10px;
   }
-  /* .main__current-temp-box {
-    display: block;
-  } */
   .main__current-humidity,
   .main__current-wind {
     margin-left: 10px;
+    width: 132px;
   }
 }
 @media (max-width: 742px) {
