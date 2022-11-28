@@ -29,8 +29,8 @@ function showCity() {
   axios.get(file).then(showTemperature);
 }
 
-function intoFahrenheit() {
-  // e.preventDefault();
+function intoFahrenheit(e) {
+  e.preventDefault();
   fahrenheit.classList.add('active');
   celsius.classList.remove('active');
   document.getElementById('wind').innerHTML = Math.round(windSpeed * 2.237);
@@ -38,8 +38,8 @@ function intoFahrenheit() {
   getImperialForecast();
 }
 
-function intoCelsius() {
-  // e.preventDefault();
+function intoCelsius(e) {
+  e.preventDefault();
   celsius.classList.add('active');
   fahrenheit.classList.remove('active');
   document.getElementById('current-temp').innerText = currentCelsius;
@@ -260,6 +260,8 @@ function showPosition(position) {
   let longitude = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
+  celsius.classList.add('active');
+  fahrenheit.classList.remove('active');
 }
 
 function getCurrentPosition(e) {
