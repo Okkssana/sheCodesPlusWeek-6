@@ -369,6 +369,9 @@ ul {
   transition: all ease-in 0.2s;
   background-color: #cacaca;
 }
+.footer__repository {
+  margin-bottom: 10px;
+}
 
 @media (max-width: 880px) {
   .header__content {
