@@ -44,7 +44,7 @@ function intoCelsius(e) {
   fahrenheit.classList.remove('active');
   document.getElementById('current-temp').innerText = currentCelsius;
   document.getElementById('wind').innerHTML = Math.round(windSpeed);
-  document.getElementById('wind-indicator').innerHTML = 'km/h';
+  document.getElementById('wind-indicator').innerHTML = 'm/s';
   getMetricForecast();
 }
 
