@@ -7,7 +7,7 @@ let lon = null;
 let oneCallUrl = 'https://api.openweathermap.org/data/2.5/onecall?';
 let currentUrl = 'https://api.openweathermap.org/data/2.5/weather?';
 let apiOptions = 'units=metric&';
-let apiKey = '&appid=6a48a550fc04f170639e60d52b8a6bc5';
+let apiKey = '&appid=f5e814a04eddfab1740f07bf0328eee2';
 let cityName = '';
 
 let fahrenheit = document.getElementById('fahrenheit');
@@ -55,7 +55,7 @@ function search(e) {
   searchInput.value = '';
   fahrenheit.classList.remove('active');
   celsius.classList.add('active');
-  let apiKey = '6a48a550fc04f170639e60d52b8a6bc5';
+  let apiKey = 'f5e814a04eddfab1740f07bf0328eee2';
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
@@ -255,7 +255,7 @@ function showDailyImperialForecast(response) {
 }
 
 function showPosition(position) {
-  let apiKey = '6a48a550fc04f170639e60d52b8a6bc5';
+  let apiKey = 'f5e814a04eddfab1740f07bf0328eee2';
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric`;
